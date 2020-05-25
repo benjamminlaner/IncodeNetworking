@@ -20,7 +20,7 @@ public interface ISerializableCommand
 
 public static class NetworkConfig
 {
-    public const int defaultServerPort = 7050;
+    public const int defaultServerPort = 4050;
     public const int maxFragments = 16;
     public const int packageFragmentSize = NetworkParameterConstants.MTU - 128;  // 128 is just a random safety distance to MTU
     public const int maxPackageSize = maxFragments * packageFragmentSize;

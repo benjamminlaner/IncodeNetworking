@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Networking.Transport;
 using Unity.Collections;
+using Incode.Networking;
 
 public class NetworkClient
 {
@@ -68,15 +69,16 @@ public class NetworkClient
     public void Disconnect()
     {
 
-        if (this.connection.Equals(default(NetworkConnection))) { return; }
+        if (connection.Equals(default(NetworkConnection))) { return; }
 
-        this.driver.Disconnect(this.connection);
-        this.connection = default;
+        driver.Disconnect(this.connection);
+        connection = default;
+        driver.Dispose();
     }
 
     public void Update(INetworkCallbacks loop)
     {
-        this.driver.ScheduleUpdate().Complete();
+        driver.ScheduleUpdate().Complete();
 
         DataStreamReader stream;
         NetworkEvent.Type eventType;
@@ -144,7 +146,8 @@ public class NetworkClient
     {
         Debug.Log("Sending Queued Commands...");
 
-        if (playerCommands.Count <= 0) {
+        if (playerCommands.Count <= 0)
+        {
             Debug.Log(" (Client) No Messages To Send");
             return;
         }
@@ -160,4 +163,5 @@ public class NetworkClient
 
     private NetworkDriver driver;
     private NetworkConnection connection;
+    public NetworkConnection Connection { get { return connection; } }
 }

@@ -112,7 +112,7 @@ public class NetworkServer
     {
         PlayerCommand cmd = new PlayerCommand().OfType(PlayerCommandType.PlayerConnected).WithPlayerId(playerId);
         Debug.Log("Command Type: " + cmd.Type.ToString());
-    
+
 
         foreach (var pair in this.connections)
         {
@@ -121,7 +121,7 @@ public class NetworkServer
             DataStreamWriter writer = this.driver.BeginSend(pair.Value);
             cmd.SerializeToStream(ref writer);
             this.driver.EndSend(writer);
-        }   
+        }
     }
 
     public void NotifyPlayersOfDisconnectedPlayer(int playerId)
@@ -151,7 +151,7 @@ public class NetworkServer
                 this.driver.EndSend(writer);
             }
         }
-     
+
     }
 
     public void ReadDataStream(INetworkCallbacks loop)
@@ -173,7 +173,7 @@ public class NetworkServer
 
                     cmd = new PlayerCommand();
                     cmd.DeserializeFromStream(stream);
-                    loop.OnPlayerCommand(cmd);                  
+                    loop.OnPlayerCommand(cmd);
                 }
                 else if (evtType == NetworkEvent.Type.Disconnect)
                 {
@@ -195,8 +195,6 @@ public class NetworkServer
 
     private void OnConnect(int connectionId, INetworkCallbacks loop)
     {
-
-
         if (this.connections.Count >= ServerGameLoop.serverMaxClients)
         {
             Debug.Log("Refusing incoming connection " + connectionId + " due to server.maxclients");
