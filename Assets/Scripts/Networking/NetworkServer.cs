@@ -156,7 +156,6 @@ public class NetworkServer
 
     public void ReadDataStream(INetworkCallbacks loop)
     {
-
         List<int> disconnectedIds = new List<int>();
         DataStreamReader stream;
         foreach (var pair in this.connections)

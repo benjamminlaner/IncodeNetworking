@@ -72,8 +72,9 @@ public class NetworkClient
         if (connection.Equals(default(NetworkConnection))) { return; }
 
         driver.Disconnect(this.connection);
-        connection = default;
+        connection = default(NetworkConnection);
         driver.Dispose();
+        driver = default(NetworkDriver);
     }
 
     public void Update(INetworkCallbacks loop)

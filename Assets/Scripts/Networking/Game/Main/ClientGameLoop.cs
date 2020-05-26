@@ -53,9 +53,10 @@ public class ClientGameLoop : IGameLoop, INetworkCallbacks
         return true;
     }
 
-    public IGameLoop WithPlayer(GameObject playerPrefab)
+
+    public void SetPlayer(GameObject playerGO)
     {
-        return this;
+        throw new NotImplementedException();
     }
 
     public void OnConnect(int id)
@@ -140,7 +141,7 @@ public class ClientGameLoop : IGameLoop, INetworkCallbacks
                                         .WithPlayerId(localPlayerId);
         //testCommand.startingPosition = Vector3.zero;
         testCommand.endingPosition = Vector3.right;
-        testCommand.endingRotation = Quaternion.Euler(Vector3.right);
+        testCommand.endingRotation = Quaternion.Euler(0f, 90f, 0f);
 
         Debug.LogFormat($"Sending Position. X: {0}, Y: {1}, Z: {2}", testCommand.endingPosition.x, testCommand.endingPosition.y, testCommand.endingPosition.z);
         Debug.LogFormat($"Sending Rotation. X: {0}, Y: {1}, Z: {2}, W: {3}", testCommand.endingRotation.x, testCommand.endingRotation.y, testCommand.endingRotation.z, testCommand.endingRotation.w);
@@ -256,7 +257,6 @@ public class ClientGameLoop : IGameLoop, INetworkCallbacks
     {
         commandQueue.Enqueue(cmd);
     }
-
 
     private List<PlayerCommand> commands = new List<PlayerCommand>();
     private Queue<PlayerCommand> commandQueue = new Queue<PlayerCommand>();

@@ -9,6 +9,7 @@ public class ServerGameLoop : IGameLoop, INetworkCallbacks
     public static int serverPort;
 
     private GameObject player;
+    public void SetPlayer(GameObject playerGO) { player = playerGO; }
 
     private NetworkDriver driver;
 
@@ -21,29 +22,28 @@ public class ServerGameLoop : IGameLoop, INetworkCallbacks
 
     }
 
-    public IGameLoop WithPlayer(GameObject playerGO)
-    {
-        this.player = playerGO;
-        return this;
-    }
-
     public bool Init(string[] args)
     {
-        this.stateMachine = new StateMachine<ServerState>();
-        this.stateMachine.Add(ServerState.Idle, null, UpdateIdleState, null);
+        stateMachine = new StateMachine<ServerState>();
+        stateMachine.Add(ServerState.Idle, null, UpdateIdleState, null);
         // this.stateMachine.Add(ServerState.Loading, null, UpdateLoadingState, null);
         // this.stateMachine.Add(ServerState.Active, EnterActiveState, UpdateActiveState, LeaveActiveState);
         //this.networkTransport = new SocketTransport(NetworkConfig.defaultServerPort, serverMaxClients);
-        this.driver = NetworkDriver.Create();
-        this.networkServer = new NetworkServer(this.driver, 60);
+        driver = NetworkDriver.Create();
+        networkServer = new NetworkServer(driver, 60);
 
         Debug.Log("Server Initialized...");
 
-        this.serverStartTime = Time.time;
+        serverStartTime = Time.time;
 
-        this.networkServer.Init();
+        networkServer.Init();
 
         return true;
+    }
+
+    private void InitPlayerObject(int playerId)
+    {
+        players.Add(playerId, player);
     }
 
     public void SendTest() { }
@@ -52,28 +52,28 @@ public class ServerGameLoop : IGameLoop, INetworkCallbacks
 
     public void Update()
     {
-        while (this.playerCommands.Count > 0)
+        while (playerCommands.Count > 0)
         {
-            PlayerCommand cmd = this.playerCommands.Dequeue();
+            PlayerCommand cmd = playerCommands.Dequeue();
 
             GameObject player;
-            this.players.TryGetValue(cmd.PlayerID, out player);
+            players.TryGetValue(cmd.PlayerID, out player);
 
             player.GetComponent<NetworkPlayer>().QueueCommand(cmd);
         }
 
-        if (Time.time >= this.nextSnapshotTime)
+        if (Time.time >= nextSnapshotTime)
         {
-            foreach (KeyValuePair<int, GameObject> playerEntry in this.players)
+            foreach (KeyValuePair<int, GameObject> playerEntry in players)
             {
                 PlayerCommand snapCmd = playerEntry.Value.GetComponent<NetworkPlayer>().GetCurrentSnapshot(playerEntry.Key);
-                this.playerSnapshots.Enqueue(snapCmd);
+                playerSnapshots.Enqueue(snapCmd);
             }
 
-            this.networkServer.SendPlayerSnapshots(this.playerSnapshots);
+            networkServer.SendPlayerSnapshots(playerSnapshots);
         }
 
-        this.networkServer.Update(this);
+        networkServer.Update(this);
     }
 
     public void ShutDown()
@@ -102,11 +102,6 @@ public class ServerGameLoop : IGameLoop, INetworkCallbacks
         GameObject player;
         this.players.TryGetValue(id, out player);
 
-        if (player != null)
-        {
-            Object.Destroy(player);
-        }
-
         this.players.Remove(id);
         this.networkServer.NotifyPlayersOfDisconnectedPlayer(id);
     }
@@ -114,7 +109,7 @@ public class ServerGameLoop : IGameLoop, INetworkCallbacks
     public void OnPlayerCommand(PlayerCommand command)
     {
         Debug.Log("(Server) Received Player Command");
-        this.playerCommands.Enqueue(command);
+        playerCommands.Enqueue(command);
     }
 
     public void OnConnectionAck(PlayerCommand cmd) { }
@@ -149,12 +144,6 @@ public class ServerGameLoop : IGameLoop, INetworkCallbacks
         Idle,
         Loading,
         Active,
-    }
-
-    private void InitPlayerObject(int playerId)
-    {
-        GameObject player = this.player;
-        players.Add(playerId, player);
     }
 
     private StateMachine<ServerState> stateMachine;

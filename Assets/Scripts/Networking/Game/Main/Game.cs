@@ -8,7 +8,7 @@ public interface IGameLoop
     void Update();
     void ShutDown();
     void SendTest();
-    IGameLoop WithPlayer(GameObject playerGO);
+    void SetPlayer(GameObject playerGO);
     void OnPlayerCommand(PlayerCommand cmd);
     void OnReceiveSnapshot(PlayerCommand cmd);
 }
@@ -17,11 +17,11 @@ public class GameTime
 {
     public int TickRate
     {
-        get { return this.tickRate; }
+        get { return tickRate; }
         set
         {
-            this.tickRate = value;
-            this.tickInterval = 1.0f / this.tickRate;
+            tickRate = value;
+            tickInterval = 1.0f / tickRate;
         }
     }
 
@@ -29,12 +29,12 @@ public class GameTime
     public int tick;
     public float tickDuration;
 
-    public GameTime(int tickRate)
+    public GameTime(int _tickRate)
     {
-        this.tickRate = tickRate;
-        this.tickInterval = 1.0f / tickRate;
-        this.tick = 1;
-        this.tickDuration = 0;
+        tickRate = _tickRate;
+        tickInterval = 1.0f / tickRate;
+        tick = 1;
+        tickDuration = 0;
     }
 
     private int tickRate;
@@ -42,10 +42,9 @@ public class GameTime
 
 public class Game : MonoBehaviour
 {
-
     public static double frameTime;
     public static Game game;
-    public bool RunServer = false;
+    public bool RunServerOnAwake = false;
 
 
     public GameObject localPlayer;
@@ -55,17 +54,18 @@ public class Game : MonoBehaviour
     private ServerGameLoop serverLoop;
     private ClientGameLoop clientLoop;
 
+    private System.Diagnostics.Stopwatch clock;
+    private long clockFrequency;
+
     public void Awake()
     {
-        this.clockFrequency = System.Diagnostics.Stopwatch.Frequency;
-        this.clock = new System.Diagnostics.Stopwatch();
-        this.clock.Start();
+        clockFrequency = System.Diagnostics.Stopwatch.Frequency;
+        clock = new System.Diagnostics.Stopwatch();
+        clock.Start();
 
 #if UNITY_SERVER
-        this.RunServer = true;
+        StartServerGame();
 #endif
-        // StartServerGame();
-        // StartClientGame();
     }
 
     void OnValidate()
@@ -77,21 +77,21 @@ public class Game : MonoBehaviour
     {
         if (this == null) { return; }
 
-        frameTime = (double)this.clock.ElapsedTicks / this.clockFrequency;
+        frameTime = (double)clock.ElapsedTicks / clockFrequency;
 
-        if (this.serverLoop == null && this.RunServer)
+        if (serverLoop == null && RunServerOnAwake)
         {
-            this.StartServerGame();
+            StartServerGame();
         }
 
-        if (this.serverLoop != null)
+        if (serverLoop != null)
         {
-            this.serverLoop.Update();
+            serverLoop.Update();
         }
 
-        if (this.clientLoop != null)
+        if (clientLoop != null)
         {
-            this.clientLoop.Update();
+            clientLoop.Update();
         }
 
     }
@@ -101,27 +101,38 @@ public class Game : MonoBehaviour
         if (serverLoop != null)
         {
             serverLoop.ShutDown();
+            serverLoop = null;
         }
 
 
         if (clientLoop != null)
         {
             clientLoop.ShutDown();
+            clientLoop = null;
         }
 
     }
 
     private void OnApplicationQuit()
     {
-        if (clientLoop != null)
-        {
-            clientLoop.ShutDown();
-        }
-
         if (serverLoop != null)
         {
             serverLoop.ShutDown();
+            serverLoop = null;
         }
+
+        if (clientLoop != null)
+        {
+            clientLoop.ShutDown();
+            clientLoop = null;
+        }
+    }
+
+    public void StartServerGame()
+    {
+        serverLoop = new ServerGameLoop();
+        serverLoop.SetPlayer(networkPlayer);
+        serverLoop.Init(null);
     }
 
     public void StartClientGame()
@@ -129,8 +140,8 @@ public class Game : MonoBehaviour
         if (clientLoop == null)
         {
             clientLoop = new ClientGameLoop() as ClientGameLoop;
-            clientLoop.localPlayerGO = this.localPlayer;
-            clientLoop.networkPlayerGO = this.networkPlayer;
+            clientLoop.localPlayerGO = localPlayer;
+            clientLoop.networkPlayerGO = networkPlayer;
             clientLoop.Init(null);
         }
         else
@@ -152,19 +163,4 @@ public class Game : MonoBehaviour
         long pingTime = NetworkUtils.PingServer("localhost");
         Debug.Log($"Current Ping: {pingTime}ms");
     }
-
-    public void StartServerGame()
-    {
-
-        RunServer = true;
-
-        if (RunServer)
-        {
-            serverLoop = new ServerGameLoop().WithPlayer(networkPlayer) as ServerGameLoop;
-            serverLoop.Init(null);
-        }
-    }
-
-    private System.Diagnostics.Stopwatch clock;
-    private long clockFrequency;
 }

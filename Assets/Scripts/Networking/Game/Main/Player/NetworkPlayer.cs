@@ -27,7 +27,7 @@ public class NetworkPlayer : MonoBehaviour
         Debug.LogFormat($" (Server) Moving Player. New Position = X: {0}, Y: {1}, Z: {2}", cmd.endingPosition.x, cmd.endingPosition.y, cmd.endingPosition.z);
         Debug.LogFormat($" (Server) Rotating Player. New Rotation = X: {0}, Y: {1}, Z: {2}, W: {3}", cmd.endingRotation.x, cmd.endingRotation.y, cmd.endingRotation.z, cmd.endingRotation.w);
         transform.localPosition = Vector3.Lerp(cmd.startingPosition, cmd.endingPosition, 100 * Time.deltaTime);
-        transform.localRotation = Quaternion.Lerp(cmd.startingRotation, cmd.startingRotation, 100 * Time.deltaTime);
+        transform.localRotation = Quaternion.Lerp(cmd.startingRotation, cmd.endingRotation, 100 * Time.deltaTime);
     }
 
     public void QueueCommand(PlayerCommand cmd)
