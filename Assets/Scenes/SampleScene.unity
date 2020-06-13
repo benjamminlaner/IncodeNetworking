@@ -1013,7 +1013,7 @@ MonoBehaviour:
   AdlButton: {fileID: 0}
   DdlButton: {fileID: 0}
   PauseButton: {fileID: 0}
-  playerUpdateSystem: {fileID: 0}
+  playerUpdateSystem: {fileID: 752041011}
   LogAdapter: {fileID: 2057835063}
   EnableNLog: 0
   isPaused: 0
@@ -1029,6 +1029,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150ca1cd5e8053f40b6a8f3efc68511a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  localPlayer: {fileID: 75478018}
+  networkPlayer: {fileID: 1623374146}
 --- !u!1 &752095067
 GameObject:
   m_ObjectHideFlags: 0

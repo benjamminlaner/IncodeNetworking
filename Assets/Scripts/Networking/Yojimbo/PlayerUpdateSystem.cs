@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerUpdateSystem : MonoBehaviour
 {
+    [SerializeField]
+    private YojimboLocalPlayer localPlayer;
+    [SerializeField]
+    private YojimboNetworkPlayer networkPlayer;
     public Dictionary<ulong, NetworkPlayerState> playerNetworkDictionary;
 
     void Awake()
@@ -25,12 +29,10 @@ public class PlayerUpdateSystem : MonoBehaviour
         {
             if (entry.Value.IsOwner)
             {
-                LocalPlayer localPlayer = entry.Value.GetComponent<LocalPlayer>();
                 localPlayer.transform.position = entry.Value.Pos;
             }
             else
             {
-                NetworkPlayer networkPlayer = entry.Value.GetComponent<NetworkPlayer>();
                 networkPlayer.transform.position = entry.Value.Pos;
             }
         }

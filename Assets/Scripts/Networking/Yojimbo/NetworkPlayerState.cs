@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NetworkPlayerState : MonoBehaviour
+//TODO (BEN): Replace with struct
+public class NetworkPlayerState
 {
     public ulong Id;
     public ulong MoveState;
