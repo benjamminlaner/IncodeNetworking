@@ -36,20 +36,67 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Networking\Game\Lib\DebuggerController.cs" />
-     <Compile Include="Assets\Scripts\Networking\Game\Lib\StateMachine.cs" />
-     <Compile Include="Assets\Scripts\Networking\Game\Lib\StringExtensionMethods.cs" />
-     <Compile Include="Assets\Scripts\Networking\Game\Main\ClientGameLoop.cs" />
-     <Compile Include="Assets\Scripts\Networking\Game\Main\Game.cs" />
-     <Compile Include="Assets\Scripts\Networking\Game\Main\Player\LocalPlayer.cs" />
-     <Compile Include="Assets\Scripts\Networking\Game\Main\Player\NetworkPlayer.cs" />
-     <Compile Include="Assets\Scripts\Networking\Game\Main\Player\PlayerClient.cs" />
-     <Compile Include="Assets\Scripts\Networking\Game\Main\Player\PlayerCommand.cs" />
-     <Compile Include="Assets\Scripts\Networking\Game\Main\ServerGameLoop.cs" />
-     <Compile Include="Assets\Scripts\Networking\NetworkClient.cs" />
-     <Compile Include="Assets\Scripts\Networking\NetworkCommon.cs" />
-     <Compile Include="Assets\Scripts\Networking\NetworkServer.cs" />
-     <Compile Include="Assets\Scripts\Networking\NetworkUtils.cs" />
+     <Compile Include="Assets\NLog\Appender\FileWriter.cs" />
+     <Compile Include="Assets\NLog\Appender\SocketAppender\Networking\AbstractTcpSocket.cs" />
+     <Compile Include="Assets\NLog\Appender\SocketAppender\Networking\EventArgs\ReceiveEventArgs.cs" />
+     <Compile Include="Assets\NLog\Appender\SocketAppender\Networking\EventArgs\TcpSocketEventArgs.cs" />
+     <Compile Include="Assets\NLog\Appender\SocketAppender\Networking\TcpClientSocket.cs" />
+     <Compile Include="Assets\NLog\Appender\SocketAppender\Networking\TcpServerSocket.cs" />
+     <Compile Include="Assets\NLog\Appender\SocketAppender\SOSMaxAppender.cs" />
+     <Compile Include="Assets\NLog\Appender\SocketAppender\SocketAppender.cs" />
+     <Compile Include="Assets\NLog\Appender\SocketAppender\SocketAppenderBase.cs" />
+     <Compile Include="Assets\NLog\Formatter\ColorCodeFormatter.cs" />
+     <Compile Include="Assets\NLog\Formatter\DefaultLogMessageFormatter.cs" />
+     <Compile Include="Assets\NLog\Formatter\TimestampFormatter.cs" />
+     <Compile Include="Assets\NLog\Log.cs" />
+     <Compile Include="Assets\NLog\LogLevel.cs" />
+     <Compile Include="Assets\NLog\Logger.cs" />
+     <Compile Include="Assets\NLog\LoggerFactory.cs" />
+     <Compile Include="Assets\NLog\NLog.Unity\Appender\ClientSocketAppender.cs" />
+     <Compile Include="Assets\NLog\NLog.Unity\Appender\DebugLogAppender.cs" />
+     <Compile Include="Assets\NLog\NLog.Unity\Appender\FileAppender.cs" />
+     <Compile Include="Assets\NLog\NLog.Unity\Appender\SOSMaxSocketAppender.cs" />
+     <Compile Include="Assets\NLog\NLog.Unity\Appender\ServerSocketAppender.cs" />
+     <Compile Include="Assets\NLog\NLog.Unity\NLogConfig.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\Lib\DebuggerController.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\Lib\StateMachine.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\Lib\StringExtensionMethods.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\Main\ClientGameLoop.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\Main\Game.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\Main\Player\LocalPlayer.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\Main\Player\NetworkPlayer.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\Main\Player\PlayerClient.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\Main\Player\PlayerCommand.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\Main\ServerGameLoop.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\NetworkClient.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\NetworkCommon.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\NetworkServer.cs" />
+     <Compile Include="Assets\Scripts\Networking\UnityTransport\NetworkUtils.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Client\ClientMatcher.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Client\GameAdapter.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Client\GameChannelType.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Client\GameClient.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Client\GameConnectionConfig.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Client\GameMessageFactory.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Client\GameMessageType.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\MessageConsumer.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\NetworkPlayerState.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\PlayerUpdateSystem.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Commands\ChangeBallSpeed_Test.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Commands\PauseCommand.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Commands\PlayerHit.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Commands\PlayerMove.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Commands\ResetCommand.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Data\Ball.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Data\GameState.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Data\IDeepCopy.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Data\MessageData.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Data\Player.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Utils\Constants.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\Shared\Utils\PriorityQueue.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\YojimboLocalPlayer.cs" />
+     <Compile Include="Assets\Scripts\Networking\Yojimbo\YojimboNetworkPlayer.cs" />
      <Compile Include="Assets\Scripts\Sample\MoveTest.cs" />
     <Reference Include="UnityEngine">
         <HintPath>G:/Program Files/Unity/2019.3.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -234,38 +281,47 @@
     <Reference Include="UnityEditor">
         <HintPath>G:/Program Files/Unity/2019.3.3f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Diagnostics.StackTrace.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization.Extensions">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Globalization.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Runtime.Serialization.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Xml">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Runtime.Serialization.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.SecureString">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Security.SecureString.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Xml.XPath.XDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="yojimbo">
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/yojimbo.dll</HintPath>
+    </Reference>
     <Reference Include="MsgPack">
-        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Scripts/Networking/Game/Lib/MsgPack/unity-full/MsgPack.dll</HintPath>
+        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Scripts/Networking/UnityTransport/Lib/MsgPack/unity-full/MsgPack.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Unsafe">
         <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Library/PackageCache/com.unity.burst@1.3.0-preview.3/Unity.Burst.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
         <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Library/PackageCache/com.unity.collections@0.5.2-preview.8/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="GameLiftServerSDKNet45">
-        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/GameLiftServerSDKNet45.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf">
-        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.Immutable">
-        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="websocket-sharp">
-        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/websocket-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Buffers">
-        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory">
-        <HintPath>G:/Unity Projects/_Libraries/IncodeNetworking/Assets/Plugins/System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
         <HintPath>G:/Program Files/Unity/2019.3.3f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

@@ -237,7 +237,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 75478012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58668041bb2be49d780c89fa0ad62359, type: 3}
+  m_Script: {fileID: 11500000, guid: dc463932a59083647953b637cf4a9585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &240661036
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 752041010}
+      - m_Target: {fileID: 0}
         m_MethodName: StartServerGame
         m_Mode: 1
         m_Arguments:
@@ -446,6 +446,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294314940}
   m_CullTransparentMesh: 0
+--- !u!1001 &413943608
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_Name
+      value: NLog
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: sendToIpAddress
+      value: 192.168.1.123
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
+      propertyPath: sendOnPort
+      value: 7050
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 030089e8915cc41e1b29a058f35e7039, type: 3}
 --- !u!1 &504541451
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,6 +971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 752041009}
   - component: {fileID: 752041010}
+  - component: {fileID: 752041011}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -936,12 +1002,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 752041008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fa5799200c441eb898a1b18ba15c6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6474002d70a460246b2d6187c6fc8225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RunServer: 0
-  localPlayer: {fileID: 75478012}
-  networkPlayer: {fileID: 1623374145}
+  ResetButton: {fileID: 0}
+  IbsButton: {fileID: 0}
+  DbsButton: {fileID: 0}
+  AplButton: {fileID: 0}
+  DplButton: {fileID: 0}
+  AdlButton: {fileID: 0}
+  DdlButton: {fileID: 0}
+  PauseButton: {fileID: 0}
+  playerUpdateSystem: {fileID: 0}
+  LogAdapter: {fileID: 2057835063}
+  EnableNLog: 0
+  isPaused: 0
+--- !u!114 &752041011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752041008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150ca1cd5e8053f40b6a8f3efc68511a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &752095067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,7 +1111,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 752041010}
+      - m_Target: {fileID: 0}
         m_MethodName: SendTestData
         m_Mode: 1
         m_Arguments:
@@ -1318,7 +1405,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 752041010}
+      - m_Target: {fileID: 0}
         m_MethodName: StartClientGame
         m_Mode: 1
         m_Arguments:
@@ -1394,7 +1481,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1623374145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a22615dd55113469599f4642fbf3bb58, type: 3}
+  m_Script: {fileID: 11500000, guid: 427e58c37bcfb0d40ad3ef637681c607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &1623374148
@@ -1572,3 +1659,15 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2057835063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11400002, guid: 030089e8915cc41e1b29a058f35e7039,
+    type: 3}
+  m_PrefabInstance: {fileID: 413943608}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd15b2b77d08f48b4bcef5e9b755e5d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
